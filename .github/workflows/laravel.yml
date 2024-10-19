@@ -1,0 +1,39 @@
+name: Deploy Laravel Portfolio
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Set up PHP with the correct version (e.g., 8.1)
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, bcmath, intl, pdo, mysql
+
+    # Install Composer dependencies
+    - name: Install Composer Dependencies
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+    # Generate Application Key
+    - name: Generate Application Key
+      run: php artisan key:generate
+
+    # Optional: Run tests (if you have tests in your portfolio project)
+    # - name: Run Tests
+    #   run: php artisan test
+
+    # Build front-end assets if needed (for example, if you use Laravel Mix)
+    - name: Build Assets
+      run: npm install && npm run prod
+
+    # Optionally, deploy to a hosting platform (this depends on your setup)
+    # For example, GitHub Pages, or any other hosting provider

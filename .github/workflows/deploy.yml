@@ -40,4 +40,4 @@ jobs:
       run: cp -r public/* .
 
     - name: Move Dist Folder to Root
-      run: cp -r dist/* .
+      run: cp -r ./dist/* .

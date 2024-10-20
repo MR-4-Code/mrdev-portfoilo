@@ -38,3 +38,6 @@ jobs:
     # Move the contents of the public folder to the root
     - name: Move Public Folder to Root
       run: cp -r public/* .
+
+    - name: Move Dist Folder to Root
+      run: cp -r dist/* .

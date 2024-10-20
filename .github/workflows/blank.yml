@@ -3,7 +3,7 @@ name: Deploy Laravel Frontend to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - I_do_not_know
 
 jobs:
   deploy:

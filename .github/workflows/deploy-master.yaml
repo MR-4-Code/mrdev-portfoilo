@@ -52,11 +52,14 @@ jobs:
       - name: Move Dist Folder to Root
         run: cp -r ./dist/* .
 
-      - name: Upload generated files as an artifact (optional)
+      - name: Archive generated files to improve upload performance
+        run: zip -r deploy.zip .
+
+      - name: Upload generated files as an artifact
         uses: actions/upload-artifact@v3
         with:
           name: github-pages
-          path: ./
+          path: deploy.zip
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

@@ -1,0 +1,25 @@
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-image {
+    height: 500px;
+    width: 70%;
+    object-fit: contain;
+    padding-bottom: 120px;
+}
+
+
+.text-gradient-shadow {
+    background-color: wheat;
+    background-image: linear-gradient(white, gray);
+  }
+
+.list-group-item {
+    list-style-type: disc !important;
+    padding-left:1em !important;
+    margin-left:1em;
+}
+  

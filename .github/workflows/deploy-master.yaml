@@ -56,8 +56,9 @@ jobs:
         run: zip -r deploy.zip .
 
       - name: Upload generated files as an artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: deploy.zip
 
       - name: Deploy to GitHub Pages

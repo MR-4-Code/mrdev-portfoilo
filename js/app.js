@@ -5223,73 +5223,34 @@
         document.addEventListener('DOMContentLoaded', function () {
           document.getElementById('contact-form').addEventListener('submit', function (e) {
             e.preventDefault();
-            // var formData = new FormData(this);
-            var email = document.getElementById("email");
-            var fullName = document.getElementById("fullname");
-            var message = document.getElementById("message");
-            var toEmail = "mrdev.ps@gmail.com";
-            var body = `From ${fullName}\n\n${message}`
-            var subject = "From Contact us" + fullName;
-
-            window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            // // var submitText = document.getElementById('send-text');
-            // // var loadingSpinner = document.getElementById('loading-spinner');
-            // // submitText.classList.add('d-none');
-
-
-            // Email.send({
-            //   Host: "smtp.gmail.com",
-            //   Username: "mrdev.ps@gmail.com",
-            //   Password: "giszvgfenrxdkrgj",
-            //   To: 'info@mrdev.ps.com',
-            //   From: "mrdev.ps@gmail.com",
-            //   Subject:"From Contact us" + fullName,
-            //   Body: {
-            //     name:fullName,
-            //     email:email,
-            //     message:message
-            //   },
-            // }).then(
-            //   message => alert(message)
-            // ).catch(()=>{
-            //   console.log("Failed when sent email");
-            // });
-
-            // loadingSpinner.classList.remove('d-none');
-
-            // var csrfToken = document.querySelector('meta[name="csrf-token"]');    
-            // var token = csrfToken.getAttribute('content');
-            // fetch('/contact/send', {
-            //   method: 'POST',
-            //   headers: {
-            //     'X-CSRF-TOKEN': token
-            //   },
-            //   body: formData
-            // }).then(function (response) {
-            //   return response.json();
-            // }).then(function (data) {
-            //   if (data.success) {
-            //     document.getElementById('success-message').textContent = data.message;
-            //     document.getElementById('success-message').classList.remove('d-none');
-            //     document.getElementById('error-message').classList.add('d-none');
-            //     document.getElementById('contact-form').reset();
-            //   } else {
-            //     document.getElementById('error-message').textContent = data.message;
-            //     document.getElementById('error-message').classList.remove('d-none');
-            //     document.getElementById('success-message').classList.add('d-none');
-            //   }
-            // })["catch"](function (error) {
-            //   document.getElementById('error-message').textContent = 'Something went wrong. Please try again.';
-            //   document.getElementById('error-message').classList.remove('d-none');
-            //   document.getElementById('success-message').classList.add('d-none');
-            // })["finally"](function (data) {
-            //   submitText.classList.remove('d-none');
-            //   loadingSpinner.classList.add('d-none');
-            // });
-
+        
+            // Fetch values from form fields
+            var email = document.getElementById("email") ? document.getElementById("email").value.trim() : '';
+            var fullName = document.getElementById("fullname") ? document.getElementById("fullname").value.trim() : '';
+            var message = document.getElementById("message") ? document.getElementById("message").value.trim() : '';
+        
+            // Verify if fields are populated
+            if (!email || !fullName || !message) {
+              alert("Please fill in all the fields correctly.");
+              return;
+            }
+        
+            // Encode subject and body text with special characters handling
+            var subject = `From Contact us: ${fullName}`;
+            var body = `From ${fullName} (${email})\n\n${message}`;
+        
+            const mailtoLink = `mailto:mrdev.ps@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Double encoding for special characters that might be causing issues in some languages
+            const finalLink = mailtoLink
+              .replace(/%20/g, "+")       // Replace spaces with +
+              .replace(/%0A/g, "%0D%0A"); // Ensure new lines are recognized
+        
+            // Redirect to mailto link
+            window.location.href = finalLink;
           });
         });
+        
 
         /***/
 }),
